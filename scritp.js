@@ -31,7 +31,7 @@ const displaySearch = async (res) => {
     const mainDiv = document.createElement("div");
     const imgDiv = document.createElement("div");
     const newDiv = document.createElement("div");
-    const infoDiv = document.createElement("div")
+    const infoDiv = document.createElement("div");
     const image = document.createElement("img");
     const title = document.createElement("h2");
     const rating = document.createElement("p");
@@ -56,6 +56,8 @@ const displaySearch = async (res) => {
       genre.append(element + " ");
     }
 
+    let id = res[i].show.id;
+
     imgDiv.append(image);
     mainDiv.append(title);
     mainDiv.append(rating);
@@ -68,56 +70,62 @@ const displaySearch = async (res) => {
     newDiv.classList.add("results");
     mainDiv.classList.add("text-results");
     imgDiv.classList.add("img-results");
-    newDiv.id = `${res[i].show.id}`;
+    newDiv.id = `${id}`;
     searchDiv.append(newDiv);
 
     const descDiv = document.createElement("div");
-    const test = document.createElement("p");
-    test.append("daad");
-    descDiv.append(test)
+    const lang = document.createElement("p");
+    const summary = document.createElement("p");
+    const premire = document.createElement("p");
+    const seasonsepisodes = document.createElement("p");
+
+    try {
+      const show = await axios.get(`https://api.tvmaze.com/shows/${id}`);
+      const seasons = await axios.get(
+       `https://api.tvmaze.com/shows/${id}/seasons`
+      );
+      const episodes = await axios.get(
+       `https://api.tvmaze.com/shows/${id}/episodes`
+      );
+      seasonsepisodes.append(`${seasons.data.length} seasons | ${episodes.data.length} episodes |
+       Avg. Runtime: ${show.data.averageRuntime} mins`);
+      lang.append(show.data.language);
+      premire.append(show.data.premiered)
+      summary.innerHTML = show.data.summary
+    } catch (error) {
+      console.log("Error: " + error);
+    }
+
+    descDiv.append(seasonsepisodes);
+    seasonsepisodes.classList.add("minor")
+    descDiv.append(lang);
+    lang.classList.add("minor")
+    descDiv.append(premire);
+    premire.classList.add("minor")
+    descDiv.append(summary);
+    summary.classList.add("summary")
     descDiv.classList.add("show-des");
     descDiv.classList.toggle("collapsed");
     newDiv.append(descDiv);
+
+
+
   }
 };
 
 const addClickEvent = function (show) {
   show.forEach((element) => {
     element.addEventListener("click", async function () {
-      //   try {
-      //     const show = await axios.get(`https://api.tvmaze.com/shows/${this.id}`);
-      //     const seasons = await axios.get(
-      //       `https://api.tvmaze.com/shows/${this.id}/seasons`
-      //     );
-      //     const episodes = await axios.get(
-      //       `https://api.tvmaze.com/shows/${this.id}/episodes`
-      //     );
-      //     // displayInfo(
-      //     //   show.data.averageRuntime,
-      //     //   show.data.language,
-      //     //   show.data.premiered,
-      //     //   show.data.summary,
-      //     //   seasons.data.length,
-      //     //   episodes.data.length
-      //     // );
-      //   } catch (error) {
-      //     console.log("Error: " + error);
-      //   }
-        element.children[1].classList.toggle("collapsed")
-        element.classList.toggle("collapsed")
-        
+      element.children[1].classList.toggle("collapsed");
+      element.classList.toggle("collapsed");
     });
   });
-};
-
-const displayInfo = function (avgRunTime, lang, premire, desc, seasons, ep) {
-  console.log(avgRunTime, lang, premire, desc, seasons, ep);
 };
 
 searchForm.addEventListener("submit", async function (e) {
   e.preventDefault();
   let res = await search();
-  displaySearch(res);
+  await displaySearch(res);
   searchBar.value = "";
   shows = document.querySelectorAll(".results");
   addClickEvent(shows);
