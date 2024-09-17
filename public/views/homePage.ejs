@@ -10,29 +10,30 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <header>
-      <section id="title">
-        <h1>tvWatchList</h1>
+
+  <body class="">
+    <div class="navbar bg-accent shadow-2xl rounded-lg mx-auto w-5/6 mb-11 mt-8">
+      <section id="title" class="navbar-start">
+        <h1 >tvWatchList</h1>
       </section>
 
-      <section id="searchBarSection">
+      <section id="searchBarSection" class="navbar-center">
         <form id="searchForm">
           <input id="searchBar" type="text" placeholder="Search for a Tv Show" />
           <button id="searchBtn" type="submit">Search</button>
         </form>
       </section>
 
-      <section id="nav">
+      <section id="nav"  class="navbar-end">
         <nav>
             <a href="">something</a>
             <a href="">soemthing</a>
             <a href="">something</a>
         </nav>
       </section>
-    </header>
+    </div>
     
-    <section id="searchResults"></section>
+    <section id="searchResults" class="flex flex-wrap justify-around px-96 gap-2.5"></section>
 
     <script src="showRequests.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -37,6 +37,7 @@ const displaySearch = async (res) => {
     const rating = document.createElement("p");
     const status = document.createElement("p");
     const genre = document.createElement("p");
+    const input = document.createElement("input");
 
     title.append(res[i].show.name);
     if (res[i].show.rating.average === null) {
@@ -47,9 +48,11 @@ const displaySearch = async (res) => {
     status.append(res[i].show.status);
     try {
       image.src = res[i].show.image.medium;
+      
     } catch (error) {
       image.src =
         "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
+      image.style.width = "210px"
     }
     let gen = res[i].show.genres;
     for (let element of gen) {
@@ -57,7 +60,10 @@ const displaySearch = async (res) => {
     }
 
     let id = res[i].show.id;
-
+    
+    input.type = "checkbox";
+    input.name = "showDes"
+    newDiv.append(input)
     imgDiv.append(image);
     mainDiv.append(title);
     mainDiv.append(rating);
@@ -66,8 +72,12 @@ const displaySearch = async (res) => {
     infoDiv.append(imgDiv);
     infoDiv.append(mainDiv);
     newDiv.append(infoDiv);
-    infoDiv.classList.add("info-div");
-    newDiv.classList.add("results");
+    infoDiv.classList.add("collapse-title");
+    infoDiv.classList.add("flex");
+    newDiv.classList.add("collapse");
+    newDiv.classList.add("w-2/5");
+  
+    
     mainDiv.classList.add("text-results");
     imgDiv.classList.add("img-results");
     newDiv.id = `${id}`;
@@ -104,29 +114,17 @@ const displaySearch = async (res) => {
     premire.classList.add("minor")
     descDiv.append(summary);
     summary.classList.add("summary")
-    descDiv.classList.add("show-des");
-    descDiv.classList.toggle("collapsed");
+    descDiv.classList.add("collapse-content");
+    descDiv.classList.add("bg-accent")
     newDiv.append(descDiv);
-
-
-
   }
 };
 
-const addClickEvent = function (show) {
-  show.forEach((element) => {
-    element.addEventListener("click", async function () {
-      element.children[1].classList.toggle("collapsed");
-      element.classList.toggle("collapsed");
-    });
-  });
-};
+
 
 searchForm.addEventListener("submit", async function (e) {
   e.preventDefault();
   let res = await search();
   await displaySearch(res);
   searchBar.value = "";
-  shows = document.querySelectorAll(".results");
-  addClickEvent(shows);
 });

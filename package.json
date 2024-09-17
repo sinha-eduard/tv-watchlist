@@ -4,7 +4,9 @@
   "description": "",
   "main": "scritp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tailwind" : "npx tailwindcss -o ./public/output.css",
+    "nodemon" : "node serverRun.js",
+    "start" : "npm run tailwind && npm run nodemon"
   },
   "author": "Eduard Sinha",
   "license": "ISC",
