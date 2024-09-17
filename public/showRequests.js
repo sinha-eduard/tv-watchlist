@@ -1,6 +1,9 @@
 const searchBar = document.querySelector("#searchBar");
 const searchForm = document.querySelector("#searchForm");
 const searchDiv = document.querySelector("#searchResults");
+const searchText = document.querySelector("#searchText")
+const loadingDiv = document.querySelector("#loadingDiv")
+
 let shows = document.querySelectorAll(".results");
 
 const getShow = async (showName) => {
@@ -37,20 +40,25 @@ const displaySearch = async (res) => {
     const rating = document.createElement("p");
     const status = document.createElement("p");
     const genre = document.createElement("p");
+    const input = document.createElement("input");
 
     title.append(res[i].show.name);
+    title.classList.add("font-bold")
+    title.classList.add("text-xl")
     if (res[i].show.rating.average === null) {
       rating.append("N/A");
     } else {
       rating.append(res[i].show.rating.average);
     }
     status.append(res[i].show.status);
+
     try {
       image.src = res[i].show.image.medium;
     } catch (error) {
       image.src =
         "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png";
     }
+
     let gen = res[i].show.genres;
     for (let element of gen) {
       genre.append(element + " ");
@@ -58,6 +66,13 @@ const displaySearch = async (res) => {
 
     let id = res[i].show.id;
 
+    imgDiv.classList.add("h-[264px]")
+    imgDiv.classList.add("w-[188px]")
+    image.classList.add("max-h-[264px]")
+    image.classList.add("max-w-[188px]")
+    input.type = "radio";
+    input.name = "showDes"
+    newDiv.append(input)
     imgDiv.append(image);
     mainDiv.append(title);
     mainDiv.append(rating);
@@ -66,8 +81,15 @@ const displaySearch = async (res) => {
     infoDiv.append(imgDiv);
     infoDiv.append(mainDiv);
     newDiv.append(infoDiv);
-    infoDiv.classList.add("info-div");
-    newDiv.classList.add("results");
+    mainDiv.classList.add("pl-4")
+    infoDiv.classList.add("collapse-title");
+    infoDiv.classList.add("flex");
+    newDiv.classList.add("collapse");
+    newDiv.classList.add("w-2/5");
+    newDiv.classList.add("hover:bg-secondary-content");
+    newDiv.classList.add("text-white");
+  
+    
     mainDiv.classList.add("text-results");
     imgDiv.classList.add("img-results");
     newDiv.id = `${id}`;
@@ -104,29 +126,37 @@ const displaySearch = async (res) => {
     premire.classList.add("minor")
     descDiv.append(summary);
     summary.classList.add("summary")
-    descDiv.classList.add("show-des");
-    descDiv.classList.toggle("collapsed");
+    descDiv.classList.add("collapse-content");
+    descDiv.classList.add("bg-accent")
     newDiv.append(descDiv);
-
-
-
   }
 };
 
-const addClickEvent = function (show) {
-  show.forEach((element) => {
-    element.addEventListener("click", async function () {
-      element.children[1].classList.toggle("collapsed");
-      element.classList.toggle("collapsed");
-    });
-  });
-};
+const setH2 = function(){
+  let show = searchBar.value;
+  searchText.innerText = `Search Results For ${show}`
+}
+
+const createLoading = function(){
+  const load = document.createElement("span");
+  load.classList.add("loading")
+  load.classList.add("loading-spinner")
+  load.classList.add("text-accent")
+  load.id="load-span"
+  loadingDiv.append(load)
+}
+
+const removeLoading = function(){
+  const loadSpan = document.querySelector("#load-span")
+  loadSpan.remove()
+}
 
 searchForm.addEventListener("submit", async function (e) {
   e.preventDefault();
+  setH2()
+  createLoading()
   let res = await search();
   await displaySearch(res);
+  removeLoading()
   searchBar.value = "";
-  shows = document.querySelectorAll(".results");
-  addClickEvent(shows);
 });
