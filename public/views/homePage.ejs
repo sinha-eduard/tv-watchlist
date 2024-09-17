@@ -4,38 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tvShows</title>
-    <link rel="stylesheet" href="output.css" type="text/css"/>
+    <link rel="stylesheet" href="output.css" type="text/css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
       rel="stylesheet"
     />
   </head>
 
-  <body class="">
-    <div class="navbar bg-accent shadow-2xl rounded-lg mx-auto w-5/6 mb-11 mt-8">
-      <section id="title" class="navbar-start">
-        <h1 >tvWatchList</h1>
+  <body id="top">
+    <div
+      class="navbar bg-accent shadow-lg shadow-shadow-gray-950 rounded-lg mx-auto w-5/6 mb-11 mt-8"
+    >
+      <section id="title" class="avbar-start font-bold text-2xl pl-4 text-white w-1/4">
+        <h1>tvWatchList</h1>
       </section>
 
-      <section id="searchBarSection" class="navbar-center">
-        <form id="searchForm">
-          <input id="searchBar" type="text" placeholder="Search for a Tv Show" />
-          <button id="searchBtn" type="submit">Search</button>
+      <section id="searchBarSection" class="navbar-center w-1/2 ">
+        <form id="searchForm" class="w-full flex justify-center items-center">
+          <input
+            id="searchBar"
+            type="text"
+            placeholder="Search for a Tv Show"
+            class="input input-bordered input-secondary w-full max-w-xs"
+          />
+          <button id="searchBtn" type="submit" class="btn btn-outline">Search</button>
         </form>
       </section>
 
-      <section id="nav"  class="navbar-end">
+      <section id="nav" class="navbar-end w-1/4">
         <nav>
-            <a href="">something</a>
-            <a href="">soemthing</a>
-            <a href="">something</a>
+          <a href="" class="hover:text-white">something</a>
+          <a href="" class="hover:text-white">soemthing</a>
+          <a href="" class="hover:text-white">something</a>
         </nav>
       </section>
     </div>
-    
-    <section id="searchResults" class="flex flex-wrap justify-around px-96 gap-2.5"></section>
+
+    <div class="flex justify-center mb-11">
+      <h2 id="searchText" class="text-2xl font-bold text-accent"></h2>
+    </div>
+
+    <section
+      id="searchResults"
+      class="flex flex-wrap justify-around px-96 gap-2.5"
+    ></section>
+
+    <div id="loadingDiv" class="flex justify-center"></div>
+    </div>
 
     <script src="showRequests.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </body>
+
+  <footer class="footer footer-center bg-base-300 text-base-content p-4 mt-11">
+    <aside>
+      <a href="#top">Back to Top</a>
+    </aside>
+  </footer>
 </html>
