@@ -125,9 +125,8 @@ const displaySearch = async (res) => {
     descDiv.append(premire);
     premire.classList.add("minor")
     descDiv.append(summary);
-    summary.classList.add("summary")
     descDiv.classList.add("collapse-content");
-    descDiv.classList.add("bg-accent")
+    descDiv.classList.add("bg-primary")
     newDiv.append(descDiv);
   }
 };
@@ -141,7 +140,7 @@ const createLoading = function(){
   const load = document.createElement("span");
   load.classList.add("loading")
   load.classList.add("loading-spinner")
-  load.classList.add("text-accent")
+  load.classList.add("text-primary")
   load.id="load-span"
   loadingDiv.append(load)
 }
