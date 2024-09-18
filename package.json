@@ -4,13 +4,14 @@
   "description": "",
   "main": "scritp.js",
   "scripts": {
-    "tailwind" : "npx tailwindcss -o ./public/output.css",
-    "nodemon" : "node serverRun.js",
-    "start" : "npm run tailwind && npm run nodemon"
+    "tailwind": "npx tailwindcss -o ./public/output.css",
+    "nodemon": "node serverRun.js",
+    "start": "npm run tailwind && npm run nodemon"
   },
   "author": "Eduard Sinha",
   "license": "ISC",
   "dependencies": {
+    "@vercel/speed-insights": "^1.0.12",
     "ejs": "^3.1.10",
     "express": "^4.21.0"
   },
