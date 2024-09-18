@@ -6,7 +6,7 @@
   "scripts": {
     "tailwind": "npx tailwindcss -o ./public/output.css",
     "nodemon": "node serverRun.js",
-    "start": "npm run tailwind && npm run nodemon"
+    "build": "npm run tailwind && npm run nodemon"
   },
   "author": "Eduard Sinha",
   "license": "ISC",
