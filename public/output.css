@@ -691,6 +691,10 @@ html {
 }
 
 @media (hover:hover) {
+  .link-hover:hover {
+    text-decoration-line: underline;
+  }
+
   .label a:hover {
     --tw-text-opacity: 1;
     color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
@@ -753,22 +757,6 @@ html {
 .btn:is(input[type="radio"]):after {
   --tw-content: attr(aria-label);
   content: var(--tw-content);
-}
-
-.checkbox {
-  flex-shrink: 0;
-  --chkbg: var(--fallback-bc,oklch(var(--bc)/1));
-  --chkfg: var(--fallback-b1,oklch(var(--b1)/1));
-  height: 1.5rem;
-  width: 1.5rem;
-  cursor: pointer;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border-radius: var(--rounded-btn, 0.5rem);
-  border-width: 1px;
-  border-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-border-opacity)));
-  --tw-border-opacity: 0.2;
 }
 
 .collapse:not(td):not(tr):not(colgroup) {
@@ -1061,6 +1049,10 @@ html {
   text-decoration-line: underline;
 }
 
+.link-hover {
+  text-decoration-line: none;
+}
+
 :where(.menu li) .badge {
   justify-self: end;
 }
@@ -1162,30 +1154,6 @@ html {
 .swap-active .swap-on,
 .swap input:indeterminate ~ .swap-indeterminate {
   opacity: 1;
-}
-
-.toggle {
-  flex-shrink: 0;
-  --tglbg: var(--fallback-b1,oklch(var(--b1)/1));
-  --handleoffset: 1.5rem;
-  --handleoffsetcalculator: calc(var(--handleoffset) * -1);
-  --togglehandleborder: 0 0;
-  height: 1.5rem;
-  width: 3rem;
-  cursor: pointer;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border-radius: var(--rounded-badge, 1.9rem);
-  border-width: 1px;
-  border-color: currentColor;
-  background-color: currentColor;
-  color: var(--fallback-bc,oklch(var(--bc)/0.5));
-  transition: background,
-    box-shadow var(--animation-input, 0.2s) ease-out;
-  box-shadow: var(--handleoffsetcalculator) 0 0 2px var(--tglbg) inset,
-    0 0 0 2px var(--tglbg) inset,
-    var(--togglehandleborder);
 }
 
 .badge-accent {
@@ -1408,54 +1376,6 @@ html {
   }
 }
 
-.checkbox:focus {
-  box-shadow: none;
-}
-
-.checkbox:focus-visible {
-  outline-style: solid;
-  outline-width: 2px;
-  outline-offset: 2px;
-  outline-color: var(--fallback-bc,oklch(var(--bc)/1));
-}
-
-.checkbox:disabled {
-  border-width: 0px;
-  cursor: not-allowed;
-  border-color: transparent;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
-  opacity: 0.2;
-}
-
-.checkbox:checked,
-  .checkbox[aria-checked="true"] {
-  background-repeat: no-repeat;
-  animation: checkmark var(--animation-input, 0.2s) ease-out;
-  background-color: var(--chkbg);
-  background-image: linear-gradient(-45deg, transparent 65%, var(--chkbg) 65.99%),
-      linear-gradient(45deg, transparent 75%, var(--chkbg) 75.99%),
-      linear-gradient(-45deg, var(--chkbg) 40%, transparent 40.99%),
-      linear-gradient(
-        45deg,
-        var(--chkbg) 30%,
-        var(--chkfg) 30.99%,
-        var(--chkfg) 40%,
-        transparent 40.99%
-      ),
-      linear-gradient(-45deg, var(--chkfg) 50%, var(--chkbg) 50.99%);
-}
-
-.checkbox:indeterminate {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
-  background-repeat: no-repeat;
-  animation: checkmark var(--animation-input, 0.2s) ease-out;
-  background-image: linear-gradient(90deg, transparent 80%, var(--chkbg) 80%),
-      linear-gradient(-90deg, transparent 80%, var(--chkbg) 80%),
-      linear-gradient(0deg, var(--chkbg) 43%, var(--chkfg) 43%, var(--chkfg) 57%, var(--chkbg) 57%);
-}
-
 @keyframes checkmark {
   0% {
     background-position-y: 5px;
@@ -1672,6 +1592,19 @@ details.collapse summary::-webkit-details-marker {
   margin-inline-start: calc(var(--border-btn) * -1);
 }
 
+@supports (color:color-mix(in oklab,black,black)) {
+  @media (hover:hover) {
+    .link-accent:hover {
+      color: color-mix(in oklab,var(--fallback-a,oklch(var(--a)/1)) 80%,black);
+    }
+  }
+}
+
+.link-accent {
+  --tw-text-opacity: 1;
+  color: var(--fallback-a,oklch(var(--a)/var(--tw-text-opacity)));
+}
+
 .link:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1879,57 +1812,6 @@ details.collapse summary::-webkit-details-marker {
   }
 }
 
-[dir="rtl"] .toggle {
-  --handleoffsetcalculator: calc(var(--handleoffset) * 1);
-}
-
-.toggle:focus-visible {
-  outline-style: solid;
-  outline-width: 2px;
-  outline-offset: 2px;
-  outline-color: var(--fallback-bc,oklch(var(--bc)/0.2));
-}
-
-.toggle:hover {
-  background-color: currentColor;
-}
-
-.toggle:checked,
-  .toggle[aria-checked="true"] {
-  background-image: none;
-  --handleoffsetcalculator: var(--handleoffset);
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
-}
-
-[dir="rtl"] .toggle:checked, [dir="rtl"] .toggle[aria-checked="true"] {
-  --handleoffsetcalculator: calc(var(--handleoffset) * -1);
-}
-
-.toggle:indeterminate {
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
-  box-shadow: calc(var(--handleoffset) / 2) 0 0 2px var(--tglbg) inset,
-      calc(var(--handleoffset) / -2) 0 0 2px var(--tglbg) inset,
-      0 0 0 2px var(--tglbg) inset;
-}
-
-[dir="rtl"] .toggle:indeterminate {
-  box-shadow: calc(var(--handleoffset) / 2) 0 0 2px var(--tglbg) inset,
-        calc(var(--handleoffset) / -2) 0 0 2px var(--tglbg) inset,
-        0 0 0 2px var(--tglbg) inset;
-}
-
-.toggle:disabled {
-  cursor: not-allowed;
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-border-opacity)));
-  background-color: transparent;
-  opacity: 0.3;
-  --togglehandleborder: 0 0 0 3px var(--fallback-bc,oklch(var(--bc)/1)) inset,
-      var(--handleoffsetcalculator) 0 0 3px var(--fallback-bc,oklch(var(--bc)/1)) inset;
-}
-
 .join.join-vertical > :where(*:not(:first-child)):is(.btn) {
   margin-top: calc(var(--border-btn) * -1);
 }
@@ -1981,10 +1863,6 @@ details.collapse summary::-webkit-details-marker {
 
 .flex {
   display: flex;
-}
-
-.hidden {
-  display: none;
 }
 
 .h-4 {
@@ -2065,11 +1943,6 @@ details.collapse summary::-webkit-details-marker {
 
 .rounded-lg {
   border-radius: 0.5rem;
-}
-
-.border-primary {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
 }
 
 .bg-base-300 {
