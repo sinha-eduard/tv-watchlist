@@ -4,7 +4,7 @@
   "description": "",
   "main": "scritp.js",
   "scripts": {
-    "tailwind": "npx tailwindcss -o ./public/output.css",
+    "tailwind": "npx tailwindcss -o ./public/css/output.css",
     "nodemon": "node serverRun.js",
     "build": "npm run tailwind && npm run nodemon"
   },
