@@ -1,6 +1,18 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const mongoose = require("mongoose")
+
+const User = require("./models/user");
+
+mongoose.connect('mongodb://localhost:27017/tvShowApp')
+    .then(() => {
+        console.log("Mongoose Connection Open")
+    })
+    .catch(e =>{
+        console.log("Mongoose Connection Error")
+        console.log(e)
+    });
 
 
 app.set('view engine', 'ejs');
@@ -9,7 +21,11 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.render("homePage")
+    res.render("homePage") 
+})
+
+app.get('/home', (req, res) => {
+    res.redirect("/")
 })
 
 app.get('/createPage', (req, res) => {
@@ -30,9 +46,22 @@ app.post('/loginPage', (req, res) => {
     res.send("logining")
 })
 
-
-app.listen(8000, ()=>{
-    console.log("listening")
+app.get('/createPage/*', (req, res) => {
+    res.redirect("/404")
 })
 
-module.exports = app;
+app.get('/loginPage/*', (req, res) => {
+    res.redirect("/404")
+})
+
+app.get('/404', (req, res) => {
+    res.render("notFound")
+})
+
+app.get('/*', (req, res) => {
+    res.redirect("/404")
+})
+
+app.listen(8000, ()=>{
+    console.log("PORT8000")
+})
