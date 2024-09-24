@@ -28,31 +28,31 @@ app.get('/home', (req, res) => {
     res.redirect("/")
 })
 
-app.get('/createPage', (req, res) => {
-    res.render("createPage")
-})
+// app.get('/createPage', (req, res) => {
+//     res.render("createPage")
+// })
 
-app.get('/loginPage', (req, res) => {
-    res.render("loginPage")
-})
+// app.get('/loginPage', (req, res) => {
+//     res.render("loginPage")
+// })
 
-app.post('/createPage', (req, res) => {
-    console.log(req.body)
-    res.send("creating")
-})
+// app.post('/createPage', (req, res) => {
+//     console.log(req.body)
+//     res.send("creating")
+// })
 
-app.post('/loginPage', (req, res) => {
-    console.log(req.body)
-    res.send("logining")
-})
+// app.post('/loginPage', (req, res) => {
+//     console.log(req.body)
+//     res.send("logining")
+// })
 
-app.get('/createPage/*', (req, res) => {
-    res.redirect("/404")
-})
+// app.get('/createPage/*', (req, res) => {
+//     res.redirect("/404")
+// })
 
-app.get('/loginPage/*', (req, res) => {
-    res.redirect("/404")
-})
+// app.get('/loginPage/*', (req, res) => {
+//     res.redirect("/404")
+// })
 
 app.get('/404', (req, res) => {
     res.render("notFound")
