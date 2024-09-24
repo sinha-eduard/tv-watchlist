@@ -62,6 +62,8 @@ app.get('/*', (req, res) => {
     res.redirect("/404")
 })
 
-app.listen(8000, ()=>{
-    console.log("PORT8000")
+app.listen(3000, ()=>{
+    console.log("PORT3000")
 })
+
+module.exports = app;
