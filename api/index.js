@@ -1,22 +1,22 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const mongoose = require("mongoose")
+// const mongoose = require("mongoose")
 
-const User = require("./models/user");
+// const User = require("models/user");
 
-mongoose.connect('mongodb://localhost:27017/tvShowApp')
-    .then(() => {
-        console.log("Mongoose Connection Open")
-    })
-    .catch(e =>{
-        console.log("Mongoose Connection Error")
-        console.log(e)
-    });
+// mongoose.connect('mongodb://localhost:27017/tvShowApp')
+//     .then(() => {
+//         console.log("Mongoose Connection Open")
+//     })
+//     .catch(e =>{
+//         console.log("Mongoose Connection Error")
+//         console.log(e)
+//     });
 
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, "public/views"));
+app.set('views', "./public/views");
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 
@@ -62,8 +62,8 @@ app.get('/*', (req, res) => {
     res.redirect("/404")
 })
 
-app.listen(3000, ()=>{
-    console.log("PORT3000")
-})
+// app.listen(3000, ()=>{
+//     console.log("PORT3000")
+// })
 
 module.exports = app;

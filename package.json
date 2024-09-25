@@ -5,7 +5,7 @@
   "main": "scritp.js",
   "scripts": {
     "tailwind": "npx tailwindcss -o ./public/css/output.css",
-    "nodemon": "node serverRun.js",
+    "nodemon": "node api/index.js",
     "build": "npm run tailwind && npm run nodemon"
   },
   "author": "Eduard Sinha",
